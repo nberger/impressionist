@@ -31,6 +31,7 @@ module Impressionist
     def impressionist_count(options={})
       options.reverse_merge!(:filter=>:request_hash, :start_date=>nil, :end_date=>Time.now)
       imps = options[:start_date].blank? ? impressions : impressions.where("created_at>=? and created_at<=?",options[:start_date],options[:end_date])
+      imps = imps.where(options[:conditions]) if options[:conditions]
       options[:filter] == :all ? imps.count : imps.count(options[:filter], :distinct => true)
     end
 

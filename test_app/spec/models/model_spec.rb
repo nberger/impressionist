@@ -49,6 +49,10 @@ describe Impression do
     @article.impressionist_count(:filter=>:session_hash).should eq 7
   end
 
+  it "should return unique impression count with no date range specified and with condition on action_name" do
+    @article.impressionist_count(:conditions => {:action_name => "dashboard"}).should eq 2
+  end
+
   # tests :dependent => :destroy
   it "should delete impressions on deletion of impressionable" do
     impressions_count = Impression.all.size
