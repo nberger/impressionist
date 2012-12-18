@@ -71,7 +71,8 @@ module ImpressionistController
         :request_hash => @impressionist_hash,
         :session_hash => session_hash,
         :ip_address => request.remote_ip,
-        :referrer => request.referer
+        :referrer => request.referer,
+        :user_agent => request.user_agent
         )
     end
 

@@ -49,6 +49,12 @@ describe ArticlesController do
     click_link "Same Page"
     Impression.last.referrer.should eq "http://test.host/articles/1"
   end
+
+  it "should log the user_agent" do
+    request.stub!(:user_agent).and_return("the user agent")
+    get "show", :id=> 1
+    Impression.last.user_agent.should == "the user agent"
+  end
 end
 
 describe PostsController do
